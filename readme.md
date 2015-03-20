@@ -1,18 +1,6 @@
-# OzzyCzech dotfiles for Mac OS X
 
-## Add private config
 
-All private config can be save in `.extra` which you do not commit to this repo and just keep in your `~/`
-
-## Install/update
-
-    git clone https://github.com/OzzyCzech/dotfiles.git && cd dotfiles && ./sync.sh
-
-To update later on, just run the sync again.
-
-## Tutorials
-
-- [How to install NGINX, PHP-FPM (5.6+), Mongodb, Redis, Nodejs, Mysql, Git](https://github.com/OzzyCzech/dotfiles/blob/master/how-to-install-mac.md)
+- [How to install NGINX, PHP-FPM (5.6+), Mongodb, Redis, Nodejs, Mysql, Git](https://github.com/mardix/dotfiles/blob/master/how-to-install-mac.md)
 
 ## Credits - for more than simple inspiration
 
@@ -21,6 +9,21 @@ To update later on, just run the sync again.
 - https://github.com/mathiasbynens/dotfiles/
 - 
 
+---
+
+##Never touch your local /etc/hosts file in OS X again
+
+    brew install dnsmasq
+    mkdir -pv $(brew --prefix)/etc/
+    echo 'address=/.dev/127.0.0.1' > $(brew --prefix)/etc/dnsmasq.conf
+    sudo cp -v $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist /Library/LaunchDaemons
+    sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
+    sudo mkdir -v /etc/resolver
+    sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev'
+
+---
+
+## Install Nginx on OSX
 
 This post describes how to configure Nginx to serve application locally with pretty domains such as yourappname.dev/ without using over-engineered solutions, like pow, trying to shield the user from the complexity with extra, unnecessary abstraction layers.
 
